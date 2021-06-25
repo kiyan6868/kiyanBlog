@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>articles</title>
+</head>
+<body>
+    <h1>articles list</h1>
+    {% for article in articles %}
+        <h1><a href="">{{article.title}}</a></h1>
+        <p>{{article.snippet}}</p>
+        <p>{{article.publish_date}}</p>
+    {% endfor %}
+</body>
+</html>
