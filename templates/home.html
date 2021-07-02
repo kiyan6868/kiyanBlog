@@ -1,12 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>home</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>home</title>
+{% endblock %}
+
+{% block content %}
     <h1>home</h1>
-</body>
-</html>
+
+{% endblock %}
