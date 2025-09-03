@@ -25,6 +25,6 @@ jobs:
             npm ci --omit=dev
             npm run build
             pm2 delete kianblog || true
-            pm2 start npm --name "kianblog" -- start
-            pm2 save
+            sudo pm2 start npm --name "kianblog" -- start -- -H 0.0.0.0 -p 3000
+            sudo pm2 save
             echo "Deploy finished!"
