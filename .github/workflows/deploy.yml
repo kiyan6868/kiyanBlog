@@ -17,9 +17,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /var/www/kiyanBlog
+            cd ~/kianblog
             git fetch --all
-            git reset --hard origin/master
+            git reset --hard origin/main
             npm ci --omit=dev
             npm run build
             pm2 reload kiyanBlog || pm2 start npm --name "kiyanBlog" -- start
