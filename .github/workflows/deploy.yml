@@ -25,7 +25,6 @@ jobs:
             npm ci --omit=dev
             npm run build
             pm2 stop kianblog || true
-            pm2 delete kianblog || true
-            pm2 start ecosystem.config.js
+            pm2 reload ecosystem.config.js --only kianblog
             pm2 save
             echo "Deploy finished!"
