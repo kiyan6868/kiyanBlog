@@ -22,7 +22,7 @@ jobs:
             cd ~/kianblog
             git fetch --all
             git reset --hard origin/main
-            npm ci --omit=dev
+            npm ci
             npm run build
             pm2 stop kianblog || true
             pm2 reload ecosystem.config.js --only kianblog
