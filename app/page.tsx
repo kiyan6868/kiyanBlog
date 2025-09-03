@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <div>
       <h1>سلام!</h1>
-      <p> یه تست دیگه دیگه </p>
+      <p> یه تست دیگه  ددیگه یگه </p>
     </div>
   )
 }
