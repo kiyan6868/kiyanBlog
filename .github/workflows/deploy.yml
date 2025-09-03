@@ -1,9 +1,9 @@
-name: Deploy to VPS
+name: Deploy Next.js to VPS
 
 on:
   push:
-    branches: [ main ]   # اگر شاخه‌ات main هست تغییر بده به main
-  workflow_dispatch:        # برای اینکه دستی هم بتونی اجرا کنی
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -14,13 +14,17 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
+          username: root
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
+            echo "Deploy started..."
             cd ~/kianblog
             git fetch --all
             git reset --hard origin/main
             npm ci --omit=dev
             npm run build
-            pm2 reload kiyanBlog || pm2 start npm --name "kiyanBlog" -- start
+            pm2 delete kianblog || true
+            pm2 start npm --name "kianblog" -- start
             pm2 save
+            echo "Deploy finished!"
