@@ -1,0 +1,26 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]   # اگر شاخه‌ات main هست تغییر بده به main
+  workflow_dispatch:        # برای اینکه دستی هم بتونی اجرا کنی
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /var/www/kiyanBlog
+            git fetch --all
+            git reset --hard origin/master
+            npm ci --omit=dev
+            npm run build
+            pm2 reload kiyanBlog || pm2 start npm --name "kiyanBlog" -- start
+            pm2 save
